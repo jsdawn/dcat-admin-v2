@@ -2,7 +2,7 @@
 
 ## 新建 dcat admin 项目
 
--   `https://github.com/jqhph/dcat-admin`
+- dcat-admin(Github) `https://github.com/jqhph/dcat-admin`
 
 ```sh
 # 新建 laravel 项目
@@ -39,6 +39,9 @@ php artisan key:generate
 
 # [如无 app/Admin目录] 初始化 dcat-admin
 php artisan admin:install
+
+# [如无 数据表] 初始化数据库迁移文件
+php artisan migrate
 
 # 运行
 php artisan serve

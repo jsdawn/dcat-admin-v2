@@ -13,5 +13,8 @@ return [
         'extensions'    => '扩展',
         'scaffold'      => '代码生成器',
         'icons'         => '图标',
+        'workbench'     => '工作台',
+        'person'        => '员工列表',
+        'approval'      => '审核列表',
     ],
 ];
