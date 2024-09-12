@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-	use HasDateTimeFormatter;
+    use HasDateTimeFormatter;
     protected $table = 'person';
-    
+
+    public function approval()
+    {
+        return $this->hasMany(Approval::class, 'pid'); // 默认 person_id
+    }
 }

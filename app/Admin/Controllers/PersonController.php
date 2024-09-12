@@ -10,6 +10,7 @@ use Dcat\Admin\Http\Controllers\AdminController;
 
 class PersonController extends AdminController
 {
+    protected $sexOpts = [0 => "保密", 1 => "男", 2 => "女"];
     /**
      * Make a grid builder.
      *
@@ -21,13 +22,13 @@ class PersonController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('name');
             $grid->column('age');
-            $grid->column('sex');
+            $grid->column('sex')->using($this->sexOpts);
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-        
+
             });
         });
     }
@@ -45,7 +46,7 @@ class PersonController extends AdminController
             $show->field('id');
             $show->field('name');
             $show->field('age');
-            $show->field('sex');
+            $show->field('sex')->using($this->sexOpts);
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -61,9 +62,9 @@ class PersonController extends AdminController
         return Form::make(new Person(), function (Form $form) {
             $form->display('id');
             $form->text('name');
-            $form->text('age');
-            $form->text('sex');
-        
+            $form->number('age');
+            $form->radio('sex')->options($this->sexOpts);
+
             $form->display('created_at');
             $form->display('updated_at');
         });

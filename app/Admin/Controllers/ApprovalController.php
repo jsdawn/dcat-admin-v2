@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Approval;
+use App\Admin\Repositories\Person;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -17,17 +18,23 @@ class ApprovalController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new Approval(), function (Grid $grid) {
+        return Grid::make(new Approval(['person']), function (Grid $grid) {
             $grid->column('id')->sortable();
-            $grid->column('pid');
+
+            // 联表查询（Model关联数据表）
+            // $grid->column('pid')->display(function ($pid) {
+            //     return Person::find($pid)->name;
+            // });
+            $grid->column('person.name', '员工');
+
             $grid->column('content');
             $grid->column('status');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
-        
+
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->equal('id');
-        
+
             });
         });
     }
@@ -63,7 +70,7 @@ class ApprovalController extends AdminController
             $form->text('pid');
             $form->text('content');
             $form->text('status');
-        
+
             $form->display('created_at');
             $form->display('updated_at');
         });
