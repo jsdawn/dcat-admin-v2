@@ -2,15 +2,35 @@
 
 ### user
 
-GET http://{{host}}/api/users HTTP/1.1
+GET http://{{host}}/api/users?page=2&size=2 HTTP/1.1
 
 ###
+
 POST http://{{host}}/api/users HTTP/1.1
 content-type: {{contentType}}
 
 {
-    "name": "test4",  
-    "email": "4@qq.com",
+    "name": "test6",  
+    "email": "6@qq.com",
     "password": "123456",
     "password_confirmation": "123456"
 }
+
+###
+
+GET http://{{host}}/api/users/1 HTTP/1.1
+
+###
+
+PUT http://{{host}}/api/users/1 HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "name": "test111",  
+    "password": "123456",
+    "password_confirmation": "123456"
+}
+
+###
+
+DELETE  http://{{host}}/api/users/4 HTTP/1.1

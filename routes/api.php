@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group([
     'namespace' => 'App\\Http\\Controllers\\Api'
 ], function (Router $router) {
+
+    // users
     $router->get('/users', 'UserController@index');
     $router->post('/users', 'UserController@store');
     $router->get('/users/{id}', 'UserController@show');

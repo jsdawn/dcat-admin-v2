@@ -92,26 +92,34 @@ class ApiResponse extends Response
         $response = new static();
         $response->header('Content-Type', $response->getApiContentType());
 
-        $list = $meta = [];
-        if ($objects instanceof LengthAwarePaginator
+        $list = $meta = $items = [];
+
+        if (
+            $objects instanceof LengthAwarePaginator
             || $objects instanceof Paginator
         ) {
             $meta["total"] = $objects->total();
-            $meta["per_page"] = $objects->perPage();
+            $meta["per_page"] = $objects->perPage(); // size
             $meta["current_page"] = $objects->currentPage();
             $meta["last_page"] = $objects->lastPage();
             $meta["next_page_url"] = $objects->nextPageUrl();
             $meta["prev_page_url"] = $objects->previousPageUrl();
+
+            $items = $objects->items();
+        } else {
+            $items = $objects;
         }
 
-        if ($formatClass && $formatMethod && (is_array($objects) || is_object($objects))) {
-            foreach ($objects as $object) {
-                $list[] = $formatClass::$formatMethod($object, $appends);
+        if ($formatClass && $formatMethod && (is_array($items) || is_object($items))) {
+            foreach ($items as $item) {
+                $list[] = $formatClass::$formatMethod($item, $appends);
             }
-        } elseif ($formatClass instanceof \Closure && (is_array($objects) || is_object($objects))) {
-            foreach ($objects as $object) {
-                $list[] = $formatClass($object, $appends);
+        } elseif ($formatClass instanceof \Closure && (is_array($items) || is_object($items))) {
+            foreach ($items as $item) {
+                $list[] = $formatClass($item, $appends);
             }
+        } else {
+            $list = $items;
         }
 
         $response->setStatusCode(self::HTTP_OK);
