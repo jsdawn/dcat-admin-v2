@@ -45,6 +45,9 @@ php artisan migrate
 
 # 运行
 php artisan serve
+
+# 创建api控制器 (默认 App\\Http\\Controllers)
+php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
 ```
 
 ## 一些配置项

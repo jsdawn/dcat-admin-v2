@@ -27,8 +27,7 @@ class UserController extends Controller
         ->where('email', 'like', '%' . $keyword . '%');
     }
 
-    // $users = $query->paginate($size, ['*'], 'page', $page);
-    $users = $query->get();
+    $users = $query->paginate($size, ['*'], 'page', $page);
 
     return ApiResponse::withList($users, UserFormat::class, 'toList');
   }

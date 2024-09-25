@@ -15,18 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::group([
-    'namespace' => 'App\\Http\\Controllers\\Api'
+    'namespace' => 'App\\Http\\Controllers\\Api',
+    'middleware' => ['auth:sanctum'],
 ], function (Router $router) {
 
+    // login
+
     // users
-    $router->get('/users', 'UserController@index');
-    $router->post('/users', 'UserController@store');
-    $router->get('/users/{id}', 'UserController@show');
-    $router->put('/users/{id}', 'UserController@update');
-    $router->delete('/users/{id}', 'UserController@destroy');
+    $router->apiResource('users', 'UserController');
+
+
 });
