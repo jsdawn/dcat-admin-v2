@@ -1,13 +1,30 @@
 @contentType = application/json
 
-### user
+### ======== login ===========
+
+# @name login
+POST http://{{host}}/api/login HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "email": "333@qq.com",
+    "password": "123456"
+}
+
+### 
+# 登录成功后的 token
+@authToken = Bearer {{login.response.body.$.data.token}}
+
+### ======== user ===========
 
 GET http://{{host}}/api/users?page=2&size=2 HTTP/1.1
+Authorization: {{authToken}}
 
 ###
 
 POST http://{{host}}/api/users HTTP/1.1
 content-type: {{contentType}}
+Authorization: {{authToken}}
 
 {
     "name": "test6",  
@@ -19,11 +36,13 @@ content-type: {{contentType}}
 ###
 
 GET http://{{host}}/api/users/1 HTTP/1.1
+Authorization: {{authToken}}
 
 ###
 
 PUT http://{{host}}/api/users/1 HTTP/1.1
 content-type: {{contentType}}
+Authorization: {{authToken}}
 
 {
     "name": "test111",  
@@ -34,3 +53,5 @@ content-type: {{contentType}}
 ###
 
 DELETE  http://{{host}}/api/users/4 HTTP/1.1
+Authorization: {{authToken}}
+

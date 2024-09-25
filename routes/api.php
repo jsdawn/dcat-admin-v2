@@ -22,6 +22,9 @@ Route::group([
 ], function (Router $router) {
 
     // login
+    $router->post('login', 'LoginController@login')
+        ->name('login')
+        ->withoutMiddleware(['auth:sanctum']);
 
     // users
     $router->apiResource('users', 'UserController');

@@ -2,7 +2,7 @@
 
 ## 新建 dcat admin 项目
 
-- dcat-admin(Github) `https://github.com/jqhph/dcat-admin`
+-   dcat-admin(Github) `https://github.com/jqhph/dcat-admin`
 
 ```sh
 # 新建 laravel 项目
@@ -62,3 +62,4 @@ php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
 # 设置语言为简体中文
 'locale' => 'zh-CN',
 ```
+
