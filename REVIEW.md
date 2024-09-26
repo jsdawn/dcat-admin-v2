@@ -50,6 +50,27 @@ php artisan serve
 php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
 ```
 
+## 快速新增 API 功能模块
+
+-   新建数据表 (以 article 数据表为例)
+
+-   新建/生成数据模型 `App\Models\Article`
+
+    ```sh
+    php artisan make:model Article
+    ```
+
+-   新建/生成 api 控制器 `App\Http\Controllers\Api\ArticleController`；（这里先写前台 api，为了尽早完善数据表，更新数据模型）
+
+    ```sh
+    # 生成api控制器 (默认 Controllers目录)
+    php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
+    ```
+
+-   前往管理台使用代码生成器生成 dcat-admin 管理台代码（勾选 创建表迁移文件、创建数据仓库、创建控制器、创建翻译文件）
+
+-   添加路由和菜单
+
 ## 一些配置项
 
 ### 设置语言和时区
@@ -66,5 +87,6 @@ php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
 ## 一些工具
 
 ### 图片占位符
+
 地址：https://dummyimage.com/
 示例：https://dummyimage.com/100x100/064b6e/fff.png

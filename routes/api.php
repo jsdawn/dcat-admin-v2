@@ -26,8 +26,11 @@ Route::group([
         ->name('login')
         ->withoutMiddleware(['auth:sanctum']);
 
-    // users
+    // user
     $router->apiResource('users', 'UserController');
+
+    // article
+    $router->apiResource('articles', 'UserController');
 
 
 });
