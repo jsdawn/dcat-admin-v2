@@ -7,13 +7,23 @@ use App\Http\Response\ApiResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
 
+  // 获取当前用户信息
   public function index(Request $request)
+  {
+    $users = Auth::user();
+
+    return ApiResponse::withJson($users);
+  }
+
+  // 用户列表（分页）
+  public function getList(Request $request)
   {
     $page = $request->get('page', 1);
     $size = $request->get('size', 10);
@@ -32,6 +42,7 @@ class UserController extends Controller
     return ApiResponse::withList($users, UserFormat::class, 'toList');
   }
 
+  // 新增
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
@@ -46,12 +57,19 @@ class UserController extends Controller
     }
 
     $validated = $validator->safe()->only(['name', 'email', 'password']);
+
+    $user = User::where('email', $validated['email'])->first();
+    if (!empty($user)) {
+      return ApiResponse::withError('该邮件已被注册');
+    }
+
     $validated['password'] = Hash::make($validated['password']);
 
     $user = User::create($validated);
     return ApiResponse::withJson($user);
   }
 
+  // 详情
   public function show($id)
   {
     $user = User::find($id);
@@ -62,8 +80,14 @@ class UserController extends Controller
     }
   }
 
+  // 修改
   public function update(Request $request, $id)
   {
+    // 是否当前用户
+    if (Auth::user() && Auth::user()->id != $id) {
+      return ApiResponse::withError("无权修改他人信息");
+    }
+
     $validator = Validator::make($request->all(), [
       'name' => 'nullable|max:16',
       'email' => 'nullable|email',
@@ -90,8 +114,14 @@ class UserController extends Controller
     }
   }
 
+  // 删除
   public function destroy($id)
   {
+    // 是否当前用户
+    if (Auth::user() && Auth::user()->id != $id) {
+      return ApiResponse::withError("无权删除他人信息");
+    }
+
     $user = User::find($id);
     if ($user) {
       $user->delete();

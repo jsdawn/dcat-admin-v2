@@ -88,7 +88,7 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * 通过 Auth facade 访问 Laravel 的身份验证服务
- * Auth::user() 和 $request->user() 均可获取当前认证用户$user
+ * Auth::user() 和 $request->user() 均可从token中获取当前认证用户$user
  * 实例$user可使用 Auth facade 的方法
  */
 

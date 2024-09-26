@@ -17,41 +17,46 @@ content-type: {{contentType}}
 
 ### ======== user ===========
 
-GET http://{{host}}/api/users?page=2&size=2 HTTP/1.1
+# 获取当前登录用户信息
+GET http://{{host}}/api/users HTTP/1.1
 Authorization: {{authToken}}
 
 ###
 
+# 新增/注册用户
 POST http://{{host}}/api/users HTTP/1.1
 content-type: {{contentType}}
 Authorization: {{authToken}}
 
 {
-    "name": "test6",  
-    "email": "6@qq.com",
+    "name": "test7",  
+    "email": "7@qq.com",
     "password": "123456",
     "password_confirmation": "123456"
 }
 
 ###
 
+# 获取用户信息 by id
 GET http://{{host}}/api/users/1 HTTP/1.1
 Authorization: {{authToken}}
 
 ###
 
-PUT http://{{host}}/api/users/1 HTTP/1.1
+# 修改用户信息 by id
+PUT http://{{host}}/api/users/3 HTTP/1.1
 content-type: {{contentType}}
 Authorization: {{authToken}}
 
 {
-    "name": "test111",  
+    "name": "test333",  
     "password": "123456",
     "password_confirmation": "123456"
 }
 
 ###
 
+# 删除用户 by id
 DELETE  http://{{host}}/api/users/4 HTTP/1.1
 Authorization: {{authToken}}
 

@@ -63,3 +63,8 @@ php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
 'locale' => 'zh-CN',
 ```
 
+## 一些工具
+
+### 图片占位符
+地址：https://dummyimage.com/
+示例：https://dummyimage.com/100x100/064b6e/fff.png
