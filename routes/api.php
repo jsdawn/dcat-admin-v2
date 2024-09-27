@@ -27,10 +27,11 @@ Route::group([
         ->withoutMiddleware(['auth:sanctum']);
 
     // user
-    $router->apiResource('users', 'UserController');
+    $router->apiResource('users', 'UserController')->except('store');
+    $router->post('users', 'UserController@store')->withoutMiddleware(['auth:sanctum']);
 
     // article
-    $router->apiResource('articles', 'UserController');
+    $router->apiResource('articles', 'ArticleController');
 
 
 });

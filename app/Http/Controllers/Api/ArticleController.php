@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Format\UserFormat;
 use App\Http\Response\ApiResponse;
 use App\Models\Article;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,7 +33,7 @@ class ArticleController extends Controller
 
         $users = $query->paginate($size, ['*'], 'page', $page);
 
-        return ApiResponse::withList($users, UserFormat::class, 'toList');
+        return ApiResponse::withList($users);
     }
 
     /**
@@ -44,13 +45,12 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'nullable',
-            'title' => 'required|max:50',
-            'type' => 'required',
-            'brief' => 'nullable|max:150',
-            'content' => 'nullable|max:1000',
-            'status' => 'required',
-            'users_id' => 'required',
+            'image' => 'nullable|string',
+            'title' => 'required|string|max:50',
+            'type' => 'integer', // 如果有该字段，必须是整数
+            'brief' => 'nullable|string|max:150', // 可为空/null，有值必须为字符串
+            'content' => 'nullable|string|max:1000',
+            'status' => 'integer',
         ]);
 
         if ($validator->fails()) {
@@ -58,9 +58,10 @@ class ArticleController extends Controller
         }
 
         $validated = $validator->validated();
+        $validated['user_id'] = Auth::id();
 
         $article = Article::create($validated);
-        return ApiResponse::withJson($article);
+        return ApiResponse::withJson($article->fresh());
     }
 
     /**
@@ -71,7 +72,14 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::with(['author', 'comments'])
+            ->find($id);
+
+        if (empty($article)) {
+            return ApiResponse::withError("未查询到该记录");
+        }
+
+        return ApiResponse::withJson($article);
     }
 
     /**
@@ -83,7 +91,34 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // 传了字段key，则改，不传key则不修改
+        $validator = Validator::make($request->all(), [
+            'image' => 'nullable|string',
+            'title' => 'string|max:50',
+            'type' => 'integer', // 如果有该字段，必须时整数
+            'brief' => 'nullable|string|max:150', // 可为空/null，有值必须为字符串
+            'content' => 'nullable|string|max:1000',
+            'status' => 'integer',
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::withError($validator);
+        }
+
+
+        $article = Article::find($id);
+        if (empty($article)) {
+            return ApiResponse::withError("未查询到该记录");
+        }
+
+        if ($article["user_id"] != Auth::id()) {
+            return ApiResponse::withError("无权修改该记录");
+        }
+
+        $validated = $validator->validated();
+
+        $article->update($validated);
+        return ApiResponse::withJson($article->fresh());
     }
 
     /**
@@ -94,6 +129,16 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        if (empty($article)) {
+            return ApiResponse::withError("未查询到该记录");
+        }
+
+        if ($article["user_id"] != Auth::id()) {
+            return ApiResponse::withError("无权删除该记录");
+        }
+
+        $article->delete();
+        return ApiResponse::withJson(["id" => $id]);
     }
 }

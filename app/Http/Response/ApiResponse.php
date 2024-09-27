@@ -99,7 +99,7 @@ class ApiResponse extends Response
             || $objects instanceof Paginator
         ) {
             $meta["total"] = $objects->total();
-            $meta["per_page"] = $objects->perPage(); // size
+            $meta["per_page"] = intval($objects->perPage()); // size
             $meta["current_page"] = $objects->currentPage();
             $meta["last_page"] = $objects->lastPage();
             $meta["next_page_url"] = $objects->nextPageUrl();

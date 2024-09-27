@@ -66,7 +66,7 @@ class UserController extends Controller
     $validated['password'] = Hash::make($validated['password']);
 
     $user = User::create($validated);
-    return ApiResponse::withJson($user);
+    return ApiResponse::withJson($user->fresh());
   }
 
   // 详情
@@ -99,19 +99,18 @@ class UserController extends Controller
     }
 
     $user = User::find($id);
-    if ($user) {
-      $validated = $validator->safe()->only(['name', 'email', 'password']);
-
-      if (Arr::exists($validated, 'password')) {
-        $validated['password'] = Hash::make($validated['password']);
-      }
-
-      $user->update($validated);
-      return ApiResponse::withJson($user);
-
-    } else {
+    if (empty($user)) {
       return ApiResponse::withError("未查询到该用户");
     }
+
+    $validated = $validator->safe()->only(['name', 'email', 'password']);
+
+    if (Arr::exists($validated, 'password')) {
+      $validated['password'] = Hash::make($validated['password']);
+    }
+
+    $user->update($validated);
+    return ApiResponse::withJson($user->fresh());
   }
 
   // 删除
@@ -123,12 +122,12 @@ class UserController extends Controller
     }
 
     $user = User::find($id);
-    if ($user) {
-      $user->delete();
-      return ApiResponse::withJson(["id" => $id]);
-    } else {
+    if (empty($user)) {
       return ApiResponse::withError("未查询到该用户");
     }
+
+    $user->delete();
+    return ApiResponse::withJson(["id" => $id]);
   }
 
 

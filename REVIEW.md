@@ -54,13 +54,14 @@ php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
 
 -   新建数据表 (以 article 数据表为例)
 
--   新建/生成数据模型 `App\Models\Article`
+-   新建数据模型 `App\Models\Article`
 
     ```sh
+    # 生成数据模型
     php artisan make:model Article
     ```
 
--   新建/生成 api 控制器 `App\Http\Controllers\Api\ArticleController`；（这里先写前台 api，为了尽早完善数据表，更新数据模型）
+-   新建 api 控制器 `App\Http\Controllers\Api\ArticleController`；（这里先写前台 api，为了尽早完善数据表，更新数据模型）
 
     ```sh
     # 生成api控制器 (默认 Controllers目录)

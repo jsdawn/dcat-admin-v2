@@ -7,43 +7,41 @@ POST http://{{host}}/api/login HTTP/1.1
 content-type: {{contentType}}
 
 {
-    "email": "333@qq.com",
+    "email": "wyh@qq.com",
     "password": "123456"
 }
 
-### 
-# 登录成功后的 token
+### 登录成功后的 token
 @authToken = Bearer {{login.response.body.$.data.token}}
 
-### ======== user ===========
+### ============================
+### ======== users ===========
 
-# 获取当前登录用户信息
+### 获取当前登录用户信息
+
 GET http://{{host}}/api/users HTTP/1.1
 Authorization: {{authToken}}
 
-###
+### 新增/注册
 
-# 新增/注册用户
 POST http://{{host}}/api/users HTTP/1.1
 content-type: {{contentType}}
 Authorization: {{authToken}}
 
 {
-    "name": "test7",  
-    "email": "7@qq.com",
+    "name": "wyh",  
+    "email": "wyh@qq.com",
     "password": "123456",
     "password_confirmation": "123456"
 }
 
-###
+### 详情 by id
 
-# 获取用户信息 by id
 GET http://{{host}}/api/users/1 HTTP/1.1
 Authorization: {{authToken}}
 
-###
+### 修改 by id
 
-# 修改用户信息 by id
 PUT http://{{host}}/api/users/3 HTTP/1.1
 content-type: {{contentType}}
 Authorization: {{authToken}}
@@ -54,9 +52,45 @@ Authorization: {{authToken}}
     "password_confirmation": "123456"
 }
 
-###
+### 删除 by id
 
-# 删除用户 by id
 DELETE  http://{{host}}/api/users/4 HTTP/1.1
 Authorization: {{authToken}}
 
+### ============================
+### ======== article ===========
+
+### 列表
+
+GET http://{{host}}/api/articles?size=3 HTTP/1.1
+Authorization: {{authToken}}
+
+### 新增
+
+POST http://{{host}}/api/articles HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "title": "一篇文章10"
+}
+
+### 详情 by id
+
+GET http://{{host}}/api/articles/10 HTTP/1.1
+Authorization: {{authToken}}
+
+### 修改 by id
+
+PUT http://{{host}}/api/articles/9 HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "title": "一篇文章09"
+}
+
+### 删除 by id
+
+DELETE  http://{{host}}/api/articles/5 HTTP/1.1
+Authorization: {{authToken}}
