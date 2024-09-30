@@ -46,6 +46,7 @@ class UserController extends Controller
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
+      'avatar' => 'nullable|string',
       'name' => 'required|max:16',
       'email' => 'required|email',
       'password' => 'required|min:6|max:16|confirmed',
@@ -89,6 +90,7 @@ class UserController extends Controller
     }
 
     $validator = Validator::make($request->all(), [
+      'avatar' => 'nullable|string',
       'name' => 'nullable|max:16',
       'email' => 'nullable|email',
       'password' => 'nullable|min:6|max:16|confirmed',

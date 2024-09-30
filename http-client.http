@@ -7,7 +7,7 @@ POST http://{{host}}/api/login HTTP/1.1
 content-type: {{contentType}}
 
 {
-    "email": "wyh@qq.com",
+    "email": "jsdawn@qq.com",
     "password": "123456"
 }
 
@@ -93,4 +93,45 @@ Authorization: {{authToken}}
 ### 删除 by id
 
 DELETE  http://{{host}}/api/articles/5 HTTP/1.1
+Authorization: {{authToken}}
+
+### ============================
+### ======== article.comments ===========
+
+@article_id = 1
+
+### 列表
+
+GET http://{{host}}/api/article/{{article_id}}/comments?size=5 HTTP/1.1
+Authorization: {{authToken}}
+
+### 新增
+
+POST http://{{host}}/api/article/{{article_id}}/comments HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "content": "感谢支持",
+    "to_user_id": 9
+}
+
+### 详情 by id
+
+GET http://{{host}}/api/comments/4 HTTP/1.1
+Authorization: {{authToken}}
+
+### 修改 by id
+
+PUT http://{{host}}/api/comments/5 HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "content": "感谢支持02"
+}
+
+### 删除 by id
+
+DELETE  http://{{host}}/api/comments/5 HTTP/1.1
 Authorization: {{authToken}}

@@ -33,5 +33,7 @@ Route::group([
     // article
     $router->apiResource('articles', 'ArticleController');
 
+    // Article Comment
+    $router->apiResource('article.comments', 'ArticleCommentController')->shallow();
 
 });
