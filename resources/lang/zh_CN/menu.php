@@ -14,8 +14,7 @@ return [
         'scaffold'      => '代码生成器',
         'icons'         => '图标',
         'users'         => '用户',
-        'workbench'     => '工作台',
-        'person'        => '员工列表',
-        'approval'      => '审核列表',
+        'articles'      => '文章',
+        'comments'      => '评论',
     ],
 ];

@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
     'labels' => [
         'User' => '用户',

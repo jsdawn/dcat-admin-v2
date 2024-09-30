@@ -10,6 +10,22 @@ class Article extends Model
 {
     use HasFactory, HasDateTimeFormatter;
 
+    const STATUS_CHECKING = 0;
+    const STATUS_NORMAL = 1;
+    const STATUS = [
+        self::STATUS_CHECKING => '审核中',
+        self::STATUS_NORMAL => '正常',
+    ];
+
+    const TYPE_ARTICLE = 1;
+    const TYPE_QUESTIONS = 2;
+    const TYPE_MOOD = 3;
+    const TYPE = [
+        self::TYPE_ARTICLE => '文章',
+        self::TYPE_QUESTIONS => '问答',
+        self::TYPE_MOOD => '心情',
+    ];
+
     protected $table = 'articles';
 
     // create时不可赋值

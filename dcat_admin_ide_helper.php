@@ -11,6 +11,7 @@ namespace Dcat\Admin {
     use Illuminate\Support\Collection;
 
     /**
+     * @property Grid\Column|Collection comments
      * @property Grid\Column|Collection id
      * @property Grid\Column|Collection name
      * @property Grid\Column|Collection type
@@ -36,14 +37,13 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection password
      * @property Grid\Column|Collection avatar
      * @property Grid\Column|Collection remember_token
-     * @property Grid\Column|Collection pid
      * @property Grid\Column|Collection content
-     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection like_count
      * @property Grid\Column|Collection to_user_id
      * @property Grid\Column|Collection article_id
      * @property Grid\Column|Collection image
      * @property Grid\Column|Collection brief
+     * @property Grid\Column|Collection status
      * @property Grid\Column|Collection comment_count
      * @property Grid\Column|Collection collect_count
      * @property Grid\Column|Collection uuid
@@ -54,14 +54,14 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection failed_at
      * @property Grid\Column|Collection email
      * @property Grid\Column|Collection token
-     * @property Grid\Column|Collection age
-     * @property Grid\Column|Collection sex
      * @property Grid\Column|Collection tokenable_type
      * @property Grid\Column|Collection tokenable_id
      * @property Grid\Column|Collection abilities
      * @property Grid\Column|Collection last_used_at
+     * @property Grid\Column|Collection gender
      * @property Grid\Column|Collection email_verified_at
      *
+     * @method Grid\Column|Collection comments(string $label = null)
      * @method Grid\Column|Collection id(string $label = null)
      * @method Grid\Column|Collection name(string $label = null)
      * @method Grid\Column|Collection type(string $label = null)
@@ -87,14 +87,13 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection password(string $label = null)
      * @method Grid\Column|Collection avatar(string $label = null)
      * @method Grid\Column|Collection remember_token(string $label = null)
-     * @method Grid\Column|Collection pid(string $label = null)
      * @method Grid\Column|Collection content(string $label = null)
-     * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection like_count(string $label = null)
      * @method Grid\Column|Collection to_user_id(string $label = null)
      * @method Grid\Column|Collection article_id(string $label = null)
      * @method Grid\Column|Collection image(string $label = null)
      * @method Grid\Column|Collection brief(string $label = null)
+     * @method Grid\Column|Collection status(string $label = null)
      * @method Grid\Column|Collection comment_count(string $label = null)
      * @method Grid\Column|Collection collect_count(string $label = null)
      * @method Grid\Column|Collection uuid(string $label = null)
@@ -105,12 +104,11 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection failed_at(string $label = null)
      * @method Grid\Column|Collection email(string $label = null)
      * @method Grid\Column|Collection token(string $label = null)
-     * @method Grid\Column|Collection age(string $label = null)
-     * @method Grid\Column|Collection sex(string $label = null)
      * @method Grid\Column|Collection tokenable_type(string $label = null)
      * @method Grid\Column|Collection tokenable_id(string $label = null)
      * @method Grid\Column|Collection abilities(string $label = null)
      * @method Grid\Column|Collection last_used_at(string $label = null)
+     * @method Grid\Column|Collection gender(string $label = null)
      * @method Grid\Column|Collection email_verified_at(string $label = null)
      */
     class Grid {}
@@ -118,6 +116,7 @@ namespace Dcat\Admin {
     class MiniGrid extends Grid {}
 
     /**
+     * @property Show\Field|Collection comments
      * @property Show\Field|Collection id
      * @property Show\Field|Collection name
      * @property Show\Field|Collection type
@@ -143,14 +142,13 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection password
      * @property Show\Field|Collection avatar
      * @property Show\Field|Collection remember_token
-     * @property Show\Field|Collection pid
      * @property Show\Field|Collection content
-     * @property Show\Field|Collection status
      * @property Show\Field|Collection like_count
      * @property Show\Field|Collection to_user_id
      * @property Show\Field|Collection article_id
      * @property Show\Field|Collection image
      * @property Show\Field|Collection brief
+     * @property Show\Field|Collection status
      * @property Show\Field|Collection comment_count
      * @property Show\Field|Collection collect_count
      * @property Show\Field|Collection uuid
@@ -161,14 +159,14 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection failed_at
      * @property Show\Field|Collection email
      * @property Show\Field|Collection token
-     * @property Show\Field|Collection age
-     * @property Show\Field|Collection sex
      * @property Show\Field|Collection tokenable_type
      * @property Show\Field|Collection tokenable_id
      * @property Show\Field|Collection abilities
      * @property Show\Field|Collection last_used_at
+     * @property Show\Field|Collection gender
      * @property Show\Field|Collection email_verified_at
      *
+     * @method Show\Field|Collection comments(string $label = null)
      * @method Show\Field|Collection id(string $label = null)
      * @method Show\Field|Collection name(string $label = null)
      * @method Show\Field|Collection type(string $label = null)
@@ -194,14 +192,13 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection password(string $label = null)
      * @method Show\Field|Collection avatar(string $label = null)
      * @method Show\Field|Collection remember_token(string $label = null)
-     * @method Show\Field|Collection pid(string $label = null)
      * @method Show\Field|Collection content(string $label = null)
-     * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection like_count(string $label = null)
      * @method Show\Field|Collection to_user_id(string $label = null)
      * @method Show\Field|Collection article_id(string $label = null)
      * @method Show\Field|Collection image(string $label = null)
      * @method Show\Field|Collection brief(string $label = null)
+     * @method Show\Field|Collection status(string $label = null)
      * @method Show\Field|Collection comment_count(string $label = null)
      * @method Show\Field|Collection collect_count(string $label = null)
      * @method Show\Field|Collection uuid(string $label = null)
@@ -212,12 +209,11 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection failed_at(string $label = null)
      * @method Show\Field|Collection email(string $label = null)
      * @method Show\Field|Collection token(string $label = null)
-     * @method Show\Field|Collection age(string $label = null)
-     * @method Show\Field|Collection sex(string $label = null)
      * @method Show\Field|Collection tokenable_type(string $label = null)
      * @method Show\Field|Collection tokenable_id(string $label = null)
      * @method Show\Field|Collection abilities(string $label = null)
      * @method Show\Field|Collection last_used_at(string $label = null)
+     * @method Show\Field|Collection gender(string $label = null)
      * @method Show\Field|Collection email_verified_at(string $label = null)
      */
     class Show {}

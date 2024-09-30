@@ -24,3 +24,8 @@ use Dcat\Admin\Show;
  * Admin::js('/packages/prettydocs/js/main.js');
  *
  */
+
+Grid::resolving(function (Grid $grid) {
+  // 列表默认id升序
+  $grid->model()->orderBy("id", "desc");
+});

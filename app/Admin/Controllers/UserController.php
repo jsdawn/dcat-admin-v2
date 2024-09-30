@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\User;
-use App\Utils\Options;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
@@ -23,9 +22,9 @@ class UserController extends AdminController
             $grid->column('id')->sortable();
             $grid->column('avatar');
             $grid->column('name');
-            $grid->column('gender')->using(Options::$gender_opts);
+            $grid->column('gender')->using(admin_trans('user.options.gender'));
             $grid->column('email');
-            $grid->column('status')->using(Options::$status_opts);
+            $grid->column('status')->using(admin_trans('user.options.status'));
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
@@ -49,9 +48,9 @@ class UserController extends AdminController
             $show->field('id');
             $show->field('avatar');
             $show->field('name');
-            $show->field('gender')->using(Options::$gender_opts);
+            $show->field('gender')->using(admin_trans('user.options.gender'));
             $show->field('email');
-            $show->field('status')->using(Options::$status_opts);
+            $show->field('status')->using(admin_trans('user.options.status'));
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -68,9 +67,9 @@ class UserController extends AdminController
             $form->display('id');
             $form->text('avatar');
             $form->text('name');
-            $form->select('gender')->options(Options::$gender_opts);
+            $form->select('gender')->options(admin_trans('user.options.gender'));
             $form->text('email');
-            $form->select('status')->options(Options::$status_opts);
+            $form->select('status')->options(admin_trans('user.options.status'));
 
             $form->text('password')->saving(function ($pwd) {
                 return Hash::make($pwd);
