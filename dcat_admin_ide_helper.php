@@ -39,6 +39,13 @@ namespace Dcat\Admin {
      * @property Grid\Column|Collection pid
      * @property Grid\Column|Collection content
      * @property Grid\Column|Collection status
+     * @property Grid\Column|Collection like_count
+     * @property Grid\Column|Collection to_user_id
+     * @property Grid\Column|Collection article_id
+     * @property Grid\Column|Collection image
+     * @property Grid\Column|Collection brief
+     * @property Grid\Column|Collection comment_count
+     * @property Grid\Column|Collection collect_count
      * @property Grid\Column|Collection uuid
      * @property Grid\Column|Collection connection
      * @property Grid\Column|Collection queue
@@ -83,6 +90,13 @@ namespace Dcat\Admin {
      * @method Grid\Column|Collection pid(string $label = null)
      * @method Grid\Column|Collection content(string $label = null)
      * @method Grid\Column|Collection status(string $label = null)
+     * @method Grid\Column|Collection like_count(string $label = null)
+     * @method Grid\Column|Collection to_user_id(string $label = null)
+     * @method Grid\Column|Collection article_id(string $label = null)
+     * @method Grid\Column|Collection image(string $label = null)
+     * @method Grid\Column|Collection brief(string $label = null)
+     * @method Grid\Column|Collection comment_count(string $label = null)
+     * @method Grid\Column|Collection collect_count(string $label = null)
      * @method Grid\Column|Collection uuid(string $label = null)
      * @method Grid\Column|Collection connection(string $label = null)
      * @method Grid\Column|Collection queue(string $label = null)
@@ -132,6 +146,13 @@ namespace Dcat\Admin {
      * @property Show\Field|Collection pid
      * @property Show\Field|Collection content
      * @property Show\Field|Collection status
+     * @property Show\Field|Collection like_count
+     * @property Show\Field|Collection to_user_id
+     * @property Show\Field|Collection article_id
+     * @property Show\Field|Collection image
+     * @property Show\Field|Collection brief
+     * @property Show\Field|Collection comment_count
+     * @property Show\Field|Collection collect_count
      * @property Show\Field|Collection uuid
      * @property Show\Field|Collection connection
      * @property Show\Field|Collection queue
@@ -176,6 +197,13 @@ namespace Dcat\Admin {
      * @method Show\Field|Collection pid(string $label = null)
      * @method Show\Field|Collection content(string $label = null)
      * @method Show\Field|Collection status(string $label = null)
+     * @method Show\Field|Collection like_count(string $label = null)
+     * @method Show\Field|Collection to_user_id(string $label = null)
+     * @method Show\Field|Collection article_id(string $label = null)
+     * @method Show\Field|Collection image(string $label = null)
+     * @method Show\Field|Collection brief(string $label = null)
+     * @method Show\Field|Collection comment_count(string $label = null)
+     * @method Show\Field|Collection collect_count(string $label = null)
      * @method Show\Field|Collection uuid(string $label = null)
      * @method Show\Field|Collection connection(string $label = null)
      * @method Show\Field|Collection queue(string $label = null)

@@ -4,7 +4,7 @@ return [
     'titles' => [
         'index'         => '主页',
         'admin'         => '系统',
-        'users'         => '管理员',
+        'administrator' => '管理员',
         'roles'         => '角色',
         'permission'    => '权限',
         'menu'          => '菜单',
@@ -13,6 +13,7 @@ return [
         'extensions'    => '扩展',
         'scaffold'      => '代码生成器',
         'icons'         => '图标',
+        'users'         => '用户',
         'workbench'     => '工作台',
         'person'        => '员工列表',
         'approval'      => '审核列表',

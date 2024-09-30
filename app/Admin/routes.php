@@ -13,6 +13,5 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
-    $router->resource('workbench/person', 'PersonController');
-    $router->resource('workbench/approval', 'ApprovalController');
+    $router->resource('users', 'UserController');
 });

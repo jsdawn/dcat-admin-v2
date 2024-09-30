@@ -2,15 +2,16 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Repositories\Person;
+use App\Admin\Repositories\User;
+use App\Utils\Options;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Hash;
 
-class PersonController extends AdminController
+class UserController extends AdminController
 {
-    protected $sexOpts = [0 => "保密", 1 => "男", 2 => "女"];
     /**
      * Make a grid builder.
      *
@@ -18,11 +19,13 @@ class PersonController extends AdminController
      */
     protected function grid()
     {
-        return Grid::make(new Person(), function (Grid $grid) {
+        return Grid::make(new User(), function (Grid $grid) {
             $grid->column('id')->sortable();
+            $grid->column('avatar');
             $grid->column('name');
-            $grid->column('age');
-            $grid->column('sex')->using($this->sexOpts);
+            $grid->column('gender')->using(Options::$gender_opts);
+            $grid->column('email');
+            $grid->column('status')->using(Options::$status_opts);
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
@@ -42,11 +45,13 @@ class PersonController extends AdminController
      */
     protected function detail($id)
     {
-        return Show::make($id, new Person(), function (Show $show) {
+        return Show::make($id, new User(), function (Show $show) {
             $show->field('id');
+            $show->field('avatar');
             $show->field('name');
-            $show->field('age');
-            $show->field('sex')->using($this->sexOpts);
+            $show->field('gender')->using(Options::$gender_opts);
+            $show->field('email');
+            $show->field('status')->using(Options::$status_opts);
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -59,11 +64,17 @@ class PersonController extends AdminController
      */
     protected function form()
     {
-        return Form::make(new Person(), function (Form $form) {
+        return Form::make(new User(), function (Form $form) {
             $form->display('id');
+            $form->text('avatar');
             $form->text('name');
-            $form->number('age');
-            $form->radio('sex')->options($this->sexOpts);
+            $form->select('gender')->options(Options::$gender_opts);
+            $form->text('email');
+            $form->select('status')->options(Options::$status_opts);
+
+            $form->text('password')->saving(function ($pwd) {
+                return Hash::make($pwd);
+            });
 
             $form->display('created_at');
             $form->display('updated_at');
