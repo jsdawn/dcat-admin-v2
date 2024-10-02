@@ -1,5 +1,10 @@
 # dcat admin 笔记
 
+## 建议版本
+
+-   php@7.3
+-   mysql@5.7
+
 ## 新建 dcat admin 项目
 
 -   dcat-admin(Github) `https://github.com/jqhph/dcat-admin`
