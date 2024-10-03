@@ -3,7 +3,7 @@
 ## 建议版本
 
 -   php@7.3
--   mysql@5.7
+-   mysql@5.7 （mysql8以上连接验证方式不同）
 
 ## 新建 dcat admin 项目
 
