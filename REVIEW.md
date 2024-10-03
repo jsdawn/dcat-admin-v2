@@ -3,7 +3,7 @@
 ## 建议版本
 
 -   php@7.3
--   mysql@5.7 （mysql8以上连接验证方式不同）
+-   mysql@5.7 （mysql8 以上连接验证方式不同）
 
 ## 新建 dcat admin 项目
 
@@ -13,7 +13,7 @@
 # 新建 laravel 项目
 composer create-project --prefer-dist laravel/laravel 项目名称
 
-# 连接数据库 (.dev文件)
+# 连接数据库 (.env文件)
 DB_DATABASE=数据库名称
 DB_USERNAME=root
 DB_PASSWORD=***
@@ -25,7 +25,7 @@ composer require dcat/laravel-admin:"2.*" -vvv
 # 发布 dcat-admin资源到项目
 php artisan admin:publish
 
-# 初始化 dcat-admin
+# 初始化 dcat-admin （运行数据库迁移文件并填充初始数据）
 php artisan admin:install
 
 # 运行
@@ -42,11 +42,13 @@ composer install
 # [如无 .env文件] 复制一份.env.example文件并命名为.env，然后运行生成APP_KEY
 php artisan key:generate
 
-# [如无 app/Admin目录] 初始化 dcat-admin
-php artisan admin:install
+# 连接数据库 (.env文件)
+DB_DATABASE=数据库名称
+DB_USERNAME=root
+DB_PASSWORD=***
 
-# [如无 数据表] 初始化数据库迁移文件
-php artisan migrate
+# 初始化 dcat-admin （运行数据库迁移文件并填充初始数据，提示已存在则忽略）
+php artisan admin:install
 
 # 运行
 php artisan serve
