@@ -17,6 +17,7 @@ class JsonResponse
     public function handle(Request $request, Closure $next)
     {
         // api接口报错或异常时返回JSON格式数据
+        // auth验证时使用route name为login的路由代理
         if ($request->is('api/*') && !$request->headers->has('Accept')) {
             $request->headers->set('Accept', 'application/json');
         }

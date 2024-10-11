@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Response\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -21,9 +22,15 @@ Route::group([
     'middleware' => ['auth:sanctum'],
 ], function (Router $router) {
 
+    // 框架auth验证未通过默认跳到 name为login的路由
+    $router->get('auth', function (Request $request) {
+        return ApiResponse::withError('Unauthenticated!', 401);
+    })
+        ->name('login')
+        ->withoutMiddleware(['auth:sanctum']);
+
     // login
     $router->post('login', 'LoginController@login')
-        ->name('login')
         ->withoutMiddleware(['auth:sanctum']);
 
     // user

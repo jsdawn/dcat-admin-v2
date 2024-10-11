@@ -23,7 +23,7 @@ class ArticleController extends Controller
         $size = $request->get('size', 10);
         $keyword = $request->get('keyword');
 
-        $query = Article::query();
+        $query = Article::with(['author', 'comments']);
 
         if ($keyword) {
             $query->where("id", $keyword)
