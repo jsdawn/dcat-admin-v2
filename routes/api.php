@@ -41,6 +41,11 @@ Route::group([
     $router->apiResource('articles', 'ArticleController');
 
     // Article Comment
+    /**
+     * 浅层嵌套 
+     * index=>/photos/{photo}/comments, store=>/photos/{photo}/comments
+     * show,update,destroy=>/comments/{comment}
+     */
     $router->apiResource('article.comments', 'ArticleCommentController')->shallow();
 
 });

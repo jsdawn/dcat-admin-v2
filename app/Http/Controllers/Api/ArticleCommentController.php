@@ -67,7 +67,8 @@ class ArticleCommentController extends Controller
         }
 
         $comment = ArticleComment::create($validated);
-        return ApiResponse::withJson($comment->fresh());
+        $comment = $comment->with(['user', 'toUser'])->find($comment['id']);
+        return ApiResponse::withJson($comment);
     }
 
     /**
