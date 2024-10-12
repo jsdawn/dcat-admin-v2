@@ -7,7 +7,7 @@ POST http://{{host}}/api/login HTTP/1.1
 content-type: {{contentType}}
 
 {
-    "email": "wyh@qq.com",
+    "email": "jsdawn@qq.com",
     "password": "123456"
 }
 
@@ -47,6 +47,7 @@ content-type: {{contentType}}
 Authorization: {{authToken}}
 
 {
+    "avatar": "https://dummyimage.com/100x100/064b6e/fff.png",
     "name": "test333",  
     "password": "123456",
     "password_confirmation": "123456"
@@ -72,7 +73,8 @@ content-type: {{contentType}}
 Authorization: {{authToken}}
 
 {
-    "title": "一篇文章10"
+    "title": "一篇文章10",
+    "content": ""
 }
 
 ### 详情 by id
@@ -135,3 +137,24 @@ Authorization: {{authToken}}
 
 DELETE  http://{{host}}/api/comments/5 HTTP/1.1
 Authorization: {{authToken}}
+
+### ============================
+### ======== article.likes ===========
+
+@article_id = 1
+
+### 列表
+
+GET http://{{host}}/api/article/likes?article_id=1 HTTP/1.1
+Authorization: {{authToken}}
+
+### 点赞/取消点赞
+
+POST http://{{host}}/api/article/likes HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "article_id": 1,
+    "status": 1
+}

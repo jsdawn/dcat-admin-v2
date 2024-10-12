@@ -35,13 +35,19 @@ class Article extends Model
         'collect_count'
     ];
 
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function comments()
     {
         return $this->hasMany(ArticleComment::class, 'article_id');
     }
 
-    public function author()
+    public function likes()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->hasMany(ArticleLike::class, 'article_id');
     }
+
 }

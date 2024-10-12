@@ -41,7 +41,6 @@ class ArticleCommentController extends Controller
     {
 
         $article = Article::find($articleId);
-
         if (empty($article)) {
             return ApiResponse::withError("未查询到该记录");
         }

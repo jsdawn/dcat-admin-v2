@@ -34,18 +34,24 @@ Route::group([
         ->withoutMiddleware(['auth:sanctum']);
 
     // user
-    $router->apiResource('users', 'UserController')->except('store');
-    $router->post('users', 'UserController@store')->withoutMiddleware(['auth:sanctum']);
+    $router->apiResource('users', 'UserController')
+        ->except('store');
+    $router->post('users', 'UserController@store')
+        ->withoutMiddleware(['auth:sanctum']);
 
     // article
     $router->apiResource('articles', 'ArticleController');
 
     // Article Comment
     /**
-     * 浅层嵌套 
+     * 浅层嵌套，点号相连
      * index=>/photos/{photo}/comments, store=>/photos/{photo}/comments
      * show,update,destroy=>/comments/{comment}
      */
     $router->apiResource('article.comments', 'ArticleCommentController')->shallow();
+
+    // Article Like
+    $router->apiResource('article/likes', 'ArticleLikeController')
+        ->only(['index', 'store']);
 
 });
