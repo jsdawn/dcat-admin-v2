@@ -23,7 +23,7 @@ class ArticleCommentController extends Controller
         $page = $request->get('page', 1);
         $size = $request->get('size', 10);
 
-        $query = ArticleComment::with(['user', 'toUser'])
+        $query = ArticleComment::query()
             ->where('article_id', $articleId);
 
         $comments = $query->paginate($size, ['*'], 'page', $page);
@@ -66,7 +66,7 @@ class ArticleCommentController extends Controller
         }
 
         $comment = ArticleComment::create($validated);
-        $comment = $comment->with(['user', 'toUser'])->find($comment['id']);
+        $comment = $comment->find($comment['id']);
         return ApiResponse::withJson($comment);
     }
 
@@ -78,8 +78,7 @@ class ArticleCommentController extends Controller
      */
     public function show($id)
     {
-        $comment = ArticleComment::with(['user', 'toUser'])
-            ->find($id);
+        $comment = ArticleComment::find($id);
 
         if (empty($comment)) {
             return ApiResponse::withError("未查询到该记录");

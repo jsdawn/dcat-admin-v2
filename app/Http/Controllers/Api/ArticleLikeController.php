@@ -21,7 +21,7 @@ class ArticleLikeController extends Controller
     {
         $articleId = $request->get('article_id');
 
-        $query = ArticleLike::query()->with(['user']);
+        $query = ArticleLike::query();
         if ($articleId) {
             $query->where("id", $articleId);
         }
@@ -55,7 +55,6 @@ class ArticleLikeController extends Controller
         }
 
         $like = ArticleLike::query()
-            ->with(['user'])
             ->where('article_id', $validated['article_id'])
             ->where("user_id", $validated['user_id'])
             ->first();
@@ -64,7 +63,7 @@ class ArticleLikeController extends Controller
             // 点赞
             if (empty($like)) {
                 $like = ArticleLike::create($validated);
-                $like = $like->with(['user'])->find($like['id']);
+                $like = $like->find($like['id']);
             }
             return ApiResponse::withJson($like);
         } else {

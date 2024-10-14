@@ -11,6 +11,7 @@ class ArticleLike extends Model
 
     protected $table = 'article_likes';
     protected $guarded = [];
+    protected $with = ['user:id,avatar,name'];
 
     public function user()
     {

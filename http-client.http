@@ -79,7 +79,7 @@ Authorization: {{authToken}}
 
 ### 详情 by id
 
-GET http://{{host}}/api/articles/10 HTTP/1.1
+GET http://{{host}}/api/articles/1 HTTP/1.1
 Authorization: {{authToken}}
 
 ### 修改 by id
@@ -114,7 +114,7 @@ content-type: {{contentType}}
 Authorization: {{authToken}}
 
 {
-    "content": "感谢支持",
+    "content": "感谢支持007",
     "to_user_id": 9
 }
 

@@ -122,7 +122,7 @@ Auth::check();
 Auth::user()‌;
 // 自定义看守器 默认为 `web` (config/auth.php)
 Auth::guard();
-// 获取当前的认证用户的 ID（未登录情况下会报错）
+// 获取当前的认证用户的 ID（未登录情况下会报错，先check）
 Auth::id();
 // 验证用户凭证
 Auth::validate($credentials);

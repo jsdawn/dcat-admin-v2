@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Format\UserFormat;
 use App\Http\Response\ApiResponse;
 use App\Models\Article;
 use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +23,13 @@ class ArticleController extends Controller
         $size = $request->get('size', 10);
         $keyword = $request->get('keyword');
 
-        $query = Article::query()->with(['author', 'comments.user', 'comments.toUser', 'likes.user']);
+        $query = Article::query()
+            ->with(['comments', 'likes'])
+            ->withExists([
+                'likes as is_user_like' => function (Builder $query) {
+                    $query->where('user_id', Auth::check() ? Auth::id() : 0);
+                },
+            ]);
 
         if ($keyword) {
             $query->where("id", $keyword)
@@ -72,7 +78,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Article::with(['author', 'comments'])
+        $article = Article::with(['comments', 'likes'])
             ->find($id);
 
         if (empty($article)) {

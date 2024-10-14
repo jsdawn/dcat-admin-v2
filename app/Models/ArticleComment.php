@@ -11,6 +11,7 @@ class ArticleComment extends Model
     use HasFactory, HasDateTimeFormatter;
 
     protected $guarded = [];
+    protected $with = ['user:id,avatar,name', 'toUser:id,avatar,name'];
 
     public function article()
     {

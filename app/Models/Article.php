@@ -35,6 +35,13 @@ class Article extends Model
         'collect_count'
     ];
 
+
+    /**
+     * 默认预加载的关联。
+     * @var array
+     */
+    protected $with = ['author'];
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
