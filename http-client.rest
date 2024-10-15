@@ -1,0 +1,162 @@
+@contentType = application/json
+@host = 127.0.0.1:8000
+
+### ======== login ===========
+
+# @name login
+POST http://{{host}}/api/login HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "email": "jsdawn@qq.com",
+    "password": "123456"
+}
+
+### 登录成功后的 token
+# @authToken = Bearer {{login.response.body.$.data.token}}
+@authToken = Bearer 98|8X21kIcQlzmezDRJ9FlqqgwO6XJTyaJDotdMKppb
+
+### ============================
+### ======== users ===========
+
+### 获取当前登录用户信息
+
+GET http://{{host}}/api/users HTTP/1.1
+Authorization: {{authToken}}
+
+### 新增/注册
+
+POST http://{{host}}/api/users HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "name": "wyh",
+    "email": "wyh@qq.com",
+    "password": "123456",
+    "password_confirmation": "123456"
+}
+
+### 详情 by id
+
+GET http://{{host}}/api/users/1 HTTP/1.1
+Authorization: {{authToken}}
+
+### 修改 by id
+
+PUT http://{{host}}/api/users/3 HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "avatar": "https://dummyimage.com/100x100/064b6e/fff.png",
+    "name": "test333",
+    "password": "123456",
+    "password_confirmation": "123456"
+}
+
+### 删除 by id
+
+DELETE  http://{{host}}/api/users/4 HTTP/1.1
+Authorization: {{authToken}}
+
+### ============================
+### ======== article ===========
+
+### 列表
+
+GET http://{{host}}/api/articles?size=3 HTTP/1.1
+Authorization: {{authToken}}
+
+### 新增
+
+POST http://{{host}}/api/articles HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "title": "一篇文章10",
+    "content": ""
+}
+
+### 详情 by id
+
+GET http://{{host}}/api/articles/1 HTTP/1.1
+Authorization: {{authToken}}
+
+### 修改 by id
+
+PUT http://{{host}}/api/articles/9 HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "title": "一篇文章09"
+}
+
+### 删除 by id
+
+DELETE  http://{{host}}/api/articles/5 HTTP/1.1
+Authorization: {{authToken}}
+
+### ============================
+### ======== article.comments ===========
+
+@article_id = 1
+
+### 列表
+
+GET http://{{host}}/api/article/{{article_id}}/comments?size=5 HTTP/1.1
+Authorization: {{authToken}}
+
+### 新增
+
+POST http://{{host}}/api/article/{{article_id}}/comments HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "content": "感谢支持007",
+    "to_user_id": 9
+}
+
+### 详情 by id
+
+GET http://{{host}}/api/comments/4 HTTP/1.1
+Authorization: {{authToken}}
+
+### 修改 by id
+
+PUT http://{{host}}/api/comments/5 HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "content": "感谢支持02"
+}
+
+### 删除 by id
+
+DELETE  http://{{host}}/api/comments/5 HTTP/1.1
+Authorization: {{authToken}}
+
+### ============================
+### ======== article.likes ===========
+
+@article_id = 1
+
+### 列表
+
+GET http://{{host}}/api/article/likes?article_id=1 HTTP/1.1
+Authorization: {{authToken}}
+
+### 点赞/取消点赞
+
+POST http://{{host}}/api/article/likes HTTP/1.1
+content-type: {{contentType}}
+Authorization: {{authToken}}
+
+{
+    "article_id": 1,
+    "status": 1
+}
