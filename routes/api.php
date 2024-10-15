@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::group([
-    'namespace' => 'App\\Http\\Controllers\\Api',
+    'namespace'  => 'App\\Http\\Controllers\\Api',
     'middleware' => ['auth:sanctum'],
 ], function (Router $router) {
 

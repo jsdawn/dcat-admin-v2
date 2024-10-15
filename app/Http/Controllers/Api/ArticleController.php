@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -19,8 +18,8 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $page = $request->get('page', 1);
-        $size = $request->get('size', 10);
+        $page    = $request->get('page', 1);
+        $size    = $request->get('size', 10);
         $keyword = $request->get('keyword');
 
         $query = Article::query()
@@ -51,19 +50,19 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'nullable|string',
-            'title' => 'required|string|max:50',
-            'type' => 'integer', // 如果有该字段，必须是整数
-            'brief' => 'nullable|string|max:150', // 可为空/null，有值必须为字符串
+            'image'   => 'nullable|string',
+            'title'   => 'required|string|max:50',
+            'type'    => 'integer',                 // 如果有该字段，必须是整数
+            'brief'   => 'nullable|string|max:150', // 可为空/null，有值必须为字符串
             'content' => 'nullable|string|max:1000',
-            'status' => 'integer',
+            'status'  => 'integer',
         ]);
 
         if ($validator->fails()) {
             return ApiResponse::withError($validator);
         }
 
-        $validated = $validator->validated();
+        $validated            = $validator->validated();
         $validated['user_id'] = Auth::id();
 
         $article = Article::create($validated);
@@ -99,18 +98,17 @@ class ArticleController extends Controller
     {
         // 传了字段key，则改，不传key则不修改
         $validator = Validator::make($request->all(), [
-            'image' => 'nullable|string',
-            'title' => 'string|max:50',
-            'type' => 'integer', // 如果有该字段，必须整数
-            'brief' => 'nullable|string|max:150', // 可为空/null，有值必须为字符串
+            'image'   => 'nullable|string',
+            'title'   => 'string|max:50',
+            'type'    => 'integer',                 // 如果有该字段，必须整数
+            'brief'   => 'nullable|string|max:150', // 可为空/null，有值必须为字符串
             'content' => 'nullable|string|max:1000',
-            'status' => 'integer',
+            'status'  => 'integer',
         ]);
 
         if ($validator->fails()) {
             return ApiResponse::withError($validator);
         }
-
 
         $article = Article::find($id);
         if (empty($article)) {

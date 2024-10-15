@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -39,13 +38,13 @@ class ArticleLikeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'article_id' => 'required|integer',
-            'status' => 'required',
+            'status'     => 'required',
         ]);
 
         if ($validator->fails()) {
             return ApiResponse::withError($validator);
         }
-        $validated = $validator->safe()->only(['article_id']);
+        $validated            = $validator->safe()->only(['article_id']);
         $validated['user_id'] = Auth::id();
 
         // 是否有该文章
@@ -69,7 +68,7 @@ class ArticleLikeController extends Controller
         } else {
             // 取消点赞
             $delId = 0;
-            if (!empty($like)) {
+            if (! empty($like)) {
                 $like->delete();
                 $delId = $like["id"];
             }
