@@ -1,17 +1,16 @@
 <?php
-
 namespace App\Admin\Controllers;
 
 use App\Admin\Repositories\Article;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
-use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
+use Dcat\Admin\Show;
 
 class ArticleController extends AdminController
 {
 
-    protected $typeOpts = \App\Models\Article::TYPE;
+    protected $typeOpts   = \App\Models\Article::TYPE;
     protected $statusOpts = \App\Models\Article::STATUS;
 
     /**
@@ -83,14 +82,14 @@ class ArticleController extends AdminController
         return Form::make(new Article(), function (Form $form) {
             $form->display('id');
             $form->text('image');
-            $form->text('title')->required();
+            $form->text('title');
 
             $form->select('type')
                 ->options($this->typeOpts)
                 ->required();
 
             $form->text('brief');
-            $form->text('content');
+            $form->text('content')->required();
 
             $form->select('status')
                 ->options($this->statusOpts)

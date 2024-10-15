@@ -14,7 +14,7 @@ content-type: {{contentType}}
 
 ### 登录成功后的 token
 # @authToken = Bearer {{login.response.body.$.data.token}}
-@authToken = Bearer 98|8X21kIcQlzmezDRJ9FlqqgwO6XJTyaJDotdMKppb
+@authToken = Bearer 105|MTzZ0P1X4MdsTrP8eEKywGHOcyqPh8RCxCvGgiQQ
 
 ### ============================
 ### ======== users ===========
@@ -65,7 +65,7 @@ Authorization: {{authToken}}
 
 ### 列表
 
-GET http://{{host}}/api/articles?size=3 HTTP/1.1
+GET http://{{host}}/api/articles?size=3&type=3 HTTP/1.1
 Authorization: {{authToken}}
 
 ### 新增

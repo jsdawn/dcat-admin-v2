@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateArticlesTable extends Migration
 {
@@ -16,7 +16,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('image')->nullable()->comment('封面');
-            $table->string('title')->default('')->comment('标题');
+            $table->string('title')->nullable()->comment('标题');
             $table->tinyInteger('type')->default('1')->nullable()->comment('类型');
             $table->string('brief')->nullable()->comment('简介');
             $table->longText('content')->nullable()->comment('内容');

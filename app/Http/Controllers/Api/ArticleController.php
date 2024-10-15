@@ -20,6 +20,7 @@ class ArticleController extends Controller
     {
         $page    = $request->get('page', 1);
         $size    = $request->get('size', 10);
+        $type    = $request->get('type');
         $keyword = $request->get('keyword');
 
         $query = Article::query()
@@ -29,6 +30,10 @@ class ArticleController extends Controller
                     $query->where('user_id', Auth::check() ? Auth::id() : 0);
                 },
             ]);
+
+        if ($type) {
+            $query->where('type', $type);
+        }
 
         if ($keyword) {
             $query->where("id", $keyword)
@@ -51,10 +56,10 @@ class ArticleController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'image'   => 'nullable|string',
-            'title'   => 'required|string|max:50',
+            'title'   => 'nullable|string|max:50|required_without:content',
             'type'    => 'integer',                 // 如果有该字段，必须是整数
             'brief'   => 'nullable|string|max:150', // 可为空/null，有值必须为字符串
-            'content' => 'nullable|string|max:1000',
+            'content' => 'nullable|string|max:1000|required_without:title',
             'status'  => 'integer',
         ]);
 
@@ -99,10 +104,10 @@ class ArticleController extends Controller
         // 传了字段key，则改，不传key则不修改
         $validator = Validator::make($request->all(), [
             'image'   => 'nullable|string',
-            'title'   => 'string|max:50',
-            'type'    => 'integer',                 // 如果有该字段，必须整数
+            'title'   => 'nullable|string|max:50|required_without:content',
+            'type'    => 'integer',                 // 如果有该字段，必须是整数
             'brief'   => 'nullable|string|max:150', // 可为空/null，有值必须为字符串
-            'content' => 'nullable|string|max:1000',
+            'content' => 'nullable|string|max:1000|required_without:title',
             'status'  => 'integer',
         ]);
 
