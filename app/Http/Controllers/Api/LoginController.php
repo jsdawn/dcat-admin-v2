@@ -1,11 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Response\ApiResponse;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
@@ -22,7 +23,7 @@ class LoginController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * 
+     *
      * laravel手动验证用户：http://laravel.p2hp.com/cndocs/8.x/authentication#scroll-nav__3
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -31,7 +32,7 @@ class LoginController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
+            'email'    => 'required',
             'password' => 'required',
         ]);
 
@@ -77,9 +78,31 @@ class LoginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'avatar'                => 'nullable|string',
+            'name'                  => 'required|max:16',
+            'email'                 => 'required|email',
+            'password'              => 'required|min:6|max:16|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return ApiResponse::withError($validator);
+        }
+
+        $validated = $validator->safe()->only(['name', 'email', 'password']);
+
+        $user = User::where('email', $validated['email'])->first();
+        if (! empty($user)) {
+            return ApiResponse::withError('该邮件已被注册');
+        }
+
+        $validated['password'] = Hash::make($validated['password']);
+
+        $user = User::create($validated);
+        return ApiResponse::withJson($user->fresh());
     }
 
     /**

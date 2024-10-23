@@ -31,6 +31,8 @@ Route::group([
     // login
     $router->post('login', 'LoginController@login')
         ->withoutMiddleware(['auth:sanctum']);
+    $router->post('register', 'LoginController@update')
+        ->withoutMiddleware(['auth:sanctum']);
 
     // user
     $router->apiResource('users', 'UserController')

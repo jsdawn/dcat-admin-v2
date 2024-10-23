@@ -14,7 +14,20 @@ content-type: {{contentType}}
 
 ### 登录成功后的 token
 # @authToken = Bearer {{login.response.body.$.data.token}}
-@authToken = Bearer 105|MTzZ0P1X4MdsTrP8eEKywGHOcyqPh8RCxCvGgiQQ
+@authToken = Bearer 107|riWREP8sIr9QYM0QLYaR6wWZnblfVZSeTHGdvBBr
+
+### 注册
+
+POST http://{{host}}/api/register HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "name": "qingshan",
+    "email": "qingshan@qq.com",
+    "password": "123456",
+    "password_confirmation": "123456"
+}
+
 
 ### ============================
 ### ======== users ===========
@@ -23,19 +36,6 @@ content-type: {{contentType}}
 
 GET http://{{host}}/api/users HTTP/1.1
 Authorization: {{authToken}}
-
-### 新增/注册
-
-POST http://{{host}}/api/users HTTP/1.1
-content-type: {{contentType}}
-Authorization: {{authToken}}
-
-{
-    "name": "wyh",
-    "email": "wyh@qq.com",
-    "password": "123456",
-    "password_confirmation": "123456"
-}
 
 ### 详情 by id
 
