@@ -8,12 +8,12 @@
         "local": {
             "version": "v2",
             "host": "127.0.0.1:8000",
-            "token": "{{$shared nonProdToken}}",
+            "authToken": "{{$shared nonProdToken}}",
             "secretKey": "devSecret"
         },
         "production": {
             "host": "example.com",
-            "token": "{{$shared prodToken}}",
+            "authToken": "{{$shared prodToken}}",
             "secretKey": "prodSecret"
         }
     },

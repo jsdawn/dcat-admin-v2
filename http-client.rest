@@ -1,5 +1,10 @@
+# phpstorm 中
+# 复制 http-client.env.json到 http-client.private.env.json使用
+# vscode 中
+# 使用 .vscode/settings.json，其余IDE使用自定义变量
+
 @contentType = application/json
-@host = 127.0.0.1:8000
+# @host = 127.0.0.1:8000
 
 ### ======== login ===========
 
@@ -14,7 +19,7 @@ content-type: {{contentType}}
 
 ### 登录成功后的 token
 # @authToken = Bearer {{login.response.body.$.data.token}}
-@authToken = Bearer 107|riWREP8sIr9QYM0QLYaR6wWZnblfVZSeTHGdvBBr
+# @authToken = Bearer 111|SHctWXihhDI8iXhTv2IKa8HvOSJzZZq7wRfzJVwA
 
 ### 注册
 
@@ -142,8 +147,6 @@ Authorization: {{authToken}}
 
 ### ============================
 ### ======== article.likes ===========
-
-@article_id = 1
 
 ### 列表
 
