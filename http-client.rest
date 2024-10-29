@@ -6,6 +6,7 @@
 @contentType = application/json
 # @host = 127.0.0.1:8000
 
+### ============================
 ### ======== login ===========
 
 # @name login
@@ -33,6 +34,20 @@ content-type: {{contentType}}
     "password_confirmation": "123456"
 }
 
+### ============================
+### ======== common ===========
+
+### 上传图片
+
+POST http://{{host}}/api/common/upload/image
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: {{authToken}}
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="1729348108197_63864973707990.png"
+
+< E:/Downloads/1729348108197_63864973707990.png
+--WebAppBoundary--
 
 ### ============================
 ### ======== users ===========

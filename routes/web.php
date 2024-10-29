@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/images/{user_id}/{path}', function ($userId, $path) {
-    return response()->file(public_path("storage/images/{$userId}/{$path}"));
+Route::get('storage/images/{user_id}/{file_name}', function ($userId, $filename) {
+    $filename = rawurlencode($filename);
+    return response()->file(public_path("storage/images/{$userId}/{$filename}"));
 })->where('path', '.*');

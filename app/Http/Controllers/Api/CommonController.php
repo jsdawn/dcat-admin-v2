@@ -19,6 +19,10 @@ class CommonController extends Controller
      */
     public function ImageUpload(Request $request, UploadHandles $handles)
     {
+        if (!$request->hasFile('file')) {
+            return ApiResponse::withError('缺少文件');
+        }
+
         $image = $handles->saveImage($request->file('file'), Auth::id());
 
         return ApiResponse::withJson($image);
