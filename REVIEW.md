@@ -72,7 +72,7 @@ php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
 
     ```sh
     # 生成api控制器 (默认 Controllers目录)
-    php artisan make:controller App\\Http\\Controllers\\Api\\xxxController --api
+    php artisan make:controller App\Http\Controllers\Api\xxxController --api
     ```
 
 -   前往管理台使用代码生成器生成 dcat-admin 管理台代码（勾选 创建表迁移文件、创建数据仓库、创建控制器、创建翻译文件）

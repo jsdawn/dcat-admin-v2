@@ -25,20 +25,23 @@ Route::group([
     $router->get('auth', function (Request $request) {
         return ApiResponse::withError('Unauthenticated!', 401);
     })
-        ->name('login')
-        ->withoutMiddleware(['auth:sanctum']);
+           ->name('login')
+           ->withoutMiddleware(['auth:sanctum']);
+
+    // common
+    $router->post('common/upload/image', 'CommonController@ImageUpload');
 
     // login
     $router->post('login', 'LoginController@login')
-        ->withoutMiddleware(['auth:sanctum']);
+           ->withoutMiddleware(['auth:sanctum']);
     $router->post('register', 'LoginController@update')
-        ->withoutMiddleware(['auth:sanctum']);
+           ->withoutMiddleware(['auth:sanctum']);
 
     // user
     $router->apiResource('users', 'UserController')
-        ->except('store');
+           ->except('store');
     $router->post('users', 'UserController@store')
-        ->withoutMiddleware(['auth:sanctum']);
+           ->withoutMiddleware(['auth:sanctum']);
 
     // article
     $router->apiResource('articles', 'ArticleController');
@@ -53,6 +56,6 @@ Route::group([
 
     // Article Like
     $router->apiResource('article/likes', 'ArticleLikeController')
-        ->only(['index', 'store']);
+           ->only(['index', 'store']);
 
 });
