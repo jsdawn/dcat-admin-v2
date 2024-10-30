@@ -119,7 +119,7 @@ auth();
 // 判断当前用户是否已认证（是否已登录）
 Auth::check();
 // 获取当前已经认证的用户实例。如果用户未登录，此方法将返回null
-Auth::user()‌;
+Auth::user();
 // 自定义看守器 默认为 `web` (config/auth.php)
 Auth::guard();
 // 获取当前的认证用户的 ID（未登录情况下会报错，先check）

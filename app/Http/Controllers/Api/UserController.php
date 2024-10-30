@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -33,8 +34,8 @@ class UserController extends Controller
 
         if ($keyword) {
             $query->where("id", $keyword)
-                ->where('name', 'like', '%' . $keyword . '%')
-                ->where('email', 'like', '%' . $keyword . '%');
+                  ->where('name', 'like', '%' . $keyword . '%')
+                  ->where('email', 'like', '%' . $keyword . '%');
         }
 
         $users = $query->paginate($size, ['*'], 'page', $page);
@@ -63,15 +64,16 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         // 是否当前用户
-        if (Auth::user() && Auth::user()->id != $id) {
+        if (Auth::check() && Auth::id() != $id) {
             return ApiResponse::withError("无权修改他人信息");
         }
 
         $validator = Validator::make($request->all(), [
-            'avatar'   => 'nullable|string',
-            'name'     => 'nullable|max:16',
-            'email'    => 'nullable|email',
-            'password' => 'nullable|min:6|max:16|confirmed',
+            'avatar'                => 'nullable|string',
+            'name'                  => 'nullable|string|max:16',
+            'email'                 => 'nullable|email',
+            'password'              => 'nullable|string|min:6|max:16|confirmed',
+            'password_confirmation' => 'nullable|string|min:6|max:16',
         ]);
 
         if ($validator->fails()) {
@@ -83,10 +85,13 @@ class UserController extends Controller
             return ApiResponse::withError("未查询到该用户");
         }
 
-        $validated = $validator->safe()->only(['name', 'email', 'password']);
+        $validated = $validator->safe()->except(['password_confirmation']);
 
-        if (Arr::exists($validated, 'password')) {
+
+        if (!empty($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);
+        } else {
+            $validated = Arr::except($validated, ['password']);
         }
 
         $user->update($validated);
