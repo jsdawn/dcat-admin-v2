@@ -45,7 +45,9 @@ class ArticleController extends Controller
                   ->where('email', 'like', '%' . $keyword . '%');
         }
 
-        $users = $query->paginate($size, ['*'], 'page', $page);
+        $users = $query
+            ->orderBy('created_at', 'desc')
+            ->paginate($size, ['*'], 'page', $page);
 
         return ApiResponse::withList($users);
     }
